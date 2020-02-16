@@ -17,10 +17,8 @@ class Driver():
 
 class SeleniumInterface():
 
-    def __init__(self):
-        d = Driver('firefox')
-        self.driver = d.get_driver()
-
+    def __init__(self, driver):
+        self.driver = driver
 
     def launch_url(self, url):
         self.driver.get(url)

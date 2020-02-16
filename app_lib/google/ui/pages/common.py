@@ -7,8 +7,8 @@ import time
 
 class Common(SeleniumInterface):
 
-    def __init__(self):
-        SeleniumInterface.__init__(self)
+    def __init__(self, driver):
+        SeleniumInterface.__init__(self, driver)
 
     def open_google_website(self, google_url):
         self.launch_url(google_url)
