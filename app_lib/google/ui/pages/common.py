@@ -1,4 +1,4 @@
-from core_framework_lib.ui.selenium_interface import SeleniumInterface
+from core_framework_lib.selenium_wrapper import SeleniumInterface
 import time
 
 

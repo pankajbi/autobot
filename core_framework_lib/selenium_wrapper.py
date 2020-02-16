@@ -2,7 +2,8 @@ from selenium import webdriver
 from select import select
 
 
-class Driver(object):
+
+class Driver():
 
     def __init__(self, browser='firefox'):
          if browser.lower() == 'firefox':
@@ -14,7 +15,7 @@ class Driver(object):
         return self.driver
 
 
-class SeleniumInterface(object):
+class SeleniumInterface():
 
     def __init__(self):
         d = Driver('firefox')

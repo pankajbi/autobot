@@ -5,7 +5,8 @@ class RunRest(object):
     def __init__(self):
         pass
 
-    def run_rest(self, method, url, log=None, json=None, params=None, headers=None, data=None, files=None,
+    @classmethod
+    def run_rest(cls, method, url, log=None, json=None, params=None, headers=None, data=None, files=None,
             auth=None, timeout=None, allow_redirects=True, proxies=None,
             hooks=None, stream=None, verify=None, cert=None, cookies=None):
 
