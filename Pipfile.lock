@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b09aa4176c2ecc8e1f92b872fa7318654c2ab366151c4394134e68a6c2b8b474"
+            "sha256": "91e803e1c30c9bc179c288d8f63a1e40c841d005d93a330610bd2841a3c06789"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -74,6 +74,14 @@
             ],
             "version": "==20.1"
         },
+        "pathlib2": {
+            "hashes": [
+                "sha256:0ec8205a157c80d7acc301c0b18fbd5d44fe655968f5d947b6ecef5290fc35db",
+                "sha256:6cd9a47b597b37cc57de1c05e56fb1a1c9cc9fab04fe78c29acd090418529868"
+            ],
+            "index": "pypi",
+            "version": "==2.3.5"
+        },
         "pluggy": {
             "hashes": [
                 "sha256:15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0",
@@ -102,6 +110,14 @@
             ],
             "index": "pypi",
             "version": "==5.3.5"
+        },
+        "pytest-datadir": {
+            "hashes": [
+                "sha256:1847ed0efe0bc54cac40ab3fba6d651c2f03d18dd01f2a582979604d32e7621e",
+                "sha256:d3af1e738df87515ee509d6135780f25a15959766d9c2b2dbe02bf4fb979cb18"
+            ],
+            "index": "pypi",
+            "version": "==1.3.1"
         },
         "pyyaml": {
             "hashes": [

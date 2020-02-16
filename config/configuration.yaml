@@ -2,3 +2,6 @@ ENVIRONMENT:
   PROTOCOL: https
   URL: www.makemytrip.com
   PORT: ''
+
+LOGGER:
+  LOG_LEVEL: CRITICAL
