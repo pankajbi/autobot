@@ -9,7 +9,10 @@ class Driver():
          if browser.lower() == 'firefox':
             self.driver = webdriver.Firefox(keep_alive=False)
          elif browser.lower() == 'chrome':
-             self.driver = webdriver.Chrome()
+             options = webdriver.ChromeOptions()
+             options.add_argument('--ignore-certificate-errors')
+             options.add_argument("--test-type")
+             self.driver = webdriver.Chrome(chrome_options=options)
 
     def get_driver(self):
         return self.driver
