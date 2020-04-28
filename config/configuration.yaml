@@ -1,7 +1,14 @@
-ENVIRONMENT:
-  PROTOCOL: https
-  URL: www.makemytrip.com
-  PORT: ''
+make_my_trip:
+  ENVIRONMENT:
+    PROTOCOL: https
+    URL: www.makemytrip.com
+    PORT: ''
+
+google:
+  ENVIRONMENT:
+    PROTOCOL: https
+    URL: www.google.co.in
+    PORT: ''
 
 LOGGER:
   LOG_LEVEL: CRITICAL

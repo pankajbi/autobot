@@ -1,12 +1,11 @@
 from utilities.yaml_utils import YamlUtils
+from core_framework_lib.project_paths import ProjectPath
+import os
 
 
-class Setup():
+class Setup:
+	configuration = YamlUtils.load_yaml_file(ProjectPath.configuration_file())
 
-	@classmethod
-	def setup(cls):
 
-		configuration_file = 'C:\\Code\\pythonautomationframework\\config\\configuration.yaml'
-		return YamlUtils.load_yaml_file(configuration_file)
 
 

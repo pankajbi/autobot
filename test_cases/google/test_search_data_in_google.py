@@ -1,4 +1,4 @@
-from app_lib.google.ui.pages.common import Common
+from app_libs.google.ui.pages.common import Common
 import  time
 import six
 

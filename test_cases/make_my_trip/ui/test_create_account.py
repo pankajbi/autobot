@@ -1,8 +1,8 @@
-from app_lib.make_my_trip.ui.home_page import HomePage
+from app_libs.make_my_trip.ui.home_page import HomePage
 import pytest
 
 
-def test_create_account1(driver_setup, logger):
+def test_create_account1(driver_setup, logger, tmp_folder):
 
 	home_page = HomePage(driver_setup)
 	assert 0, logger.error("ERROR")
