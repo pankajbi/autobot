@@ -1,14 +1,8 @@
-make_my_trip:
-  ENVIRONMENT:
-    PROTOCOL: https
-    URL: www.makemytrip.com
-    PORT: ''
+aut:
+  selenium_easy:
+      ui:
+        url: https://www.seleniumeasy.com/test/
 
-google:
-  ENVIRONMENT:
-    PROTOCOL: https
-    URL: www.google.co.in
-    PORT: ''
 
-LOGGER:
-  LOG_LEVEL: CRITICAL
+logger:
+  log_level: CRITICAL
