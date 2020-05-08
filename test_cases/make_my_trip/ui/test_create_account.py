@@ -1,20 +1,20 @@
-from app_libs.make_my_trip.ui.home_page import HomePage
-import pytest
+from app_libs.google.ui.pages.common import Common
 
 
-def test_create_account1(driver_setup, logger, tmp_folder):
+def test_open_google(driver_setup, logger, tmp_folder):
 
-	home_page = HomePage(driver_setup)
-	assert 0, logger.error("ERROR")
+	logger.info("Starting test")
+	home_page = Common(driver_setup)
 
-@pytest.fixture()
-def driver_setup():
-	from core_framework_lib.selenium_wrapper import Driver
-	driver = Driver('chrome')
-	return driver.get_driver()
+	home_page.open_google_website("https://www.google.com")
+	logger.info("Ending test")
 
-def test_create_account2(driver_setup, logger):
-	home_page = HomePage(driver_setup)
-	home_page.launch_app()
-	assert 1
-	logger.info("Success")
+
+def test_open_youtube(driver_setup, logger, tmp_folder):
+
+	logger.info("Starting test")
+	home_page = Common(driver_setup)
+
+	home_page.open_google_website("https://www.youtube.com")
+	logger.info("Ending test")
+

@@ -12,6 +12,8 @@ selenium = "*"
 pyyaml = "*"
 pathlib2 = "*"
 pytest-datadir = "*"
+pytest-html = "*"
+py = "*"
 
 [requires]
 python_version = "3.8"
