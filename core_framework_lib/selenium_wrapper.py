@@ -14,6 +14,7 @@ class Driver:
             self.driver = webdriver.Chrome(chrome_options=options)
 
     def get_driver(self):
+        self.driver.maximize_window()
         return self.driver
 
 
@@ -22,3 +23,12 @@ class SeleniumWrapper:
     def __init__(self, driver, log):
         self.driver = driver
         self.log = log
+
+    def launch_url(self, url):
+        try:
+            self.driver.get(url)
+            self.log.info("Successfully launched {url}".format(url=url))
+            return True
+        except Exception as err:
+            self.log.error("Exception occurred : {err}".format(err=str(err)))
+            return False

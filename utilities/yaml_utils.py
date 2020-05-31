@@ -11,6 +11,6 @@ class YamlUtils():
 		"""
 
 		with open(file_path) as f:
-			content = yaml.load(f,Loader=yaml.Loader)
+			content = yaml.load(f, Loader=yaml.Loader)
 
 		return content

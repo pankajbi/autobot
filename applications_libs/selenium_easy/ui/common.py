@@ -12,10 +12,9 @@ class Common(SeleniumWrapper):
 
         url = Env.selenium_easy_ui_url()
 
-        try:
-            self.driver.get(url)
-            self.log.info("Successfully launched selenium easy")
+        if self.launch_url(url):
+            self.log.info("Successfully open selenium easy.")
             return True
-        except Exception as err:
-            self.log.error("Exception occurred : {err}".format(err=str(err)))
+        else:
+            self.log.error("Failed to open selenium easy.")
             return False
