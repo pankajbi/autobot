@@ -20,3 +20,4 @@ var/
 tmp/*
 test_cases/test_pytest_practice/*
 *.log
+report.html

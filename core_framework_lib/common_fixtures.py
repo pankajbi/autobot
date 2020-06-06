@@ -2,6 +2,7 @@ import pytest
 from core_framework_lib.selenium_wrapper import Driver
 from core_framework_lib.project_paths import ProjectPath
 from core_framework_lib.logger import Logger
+from core_framework_lib.setup import FrameworkConfiguration
 
 
 @pytest.fixture(scope="function")  # Possible values for scope are: function, class, module, package or session.
@@ -10,7 +11,7 @@ def driver_setup(request, logger):
     :return: Returns driver object
     """
     # Setup and return selenium driver object
-    driver = Driver()
+    driver = Driver(implicit_wait=FrameworkConfiguration.selenium_implicit_wait)
     driver_setup = driver.get_driver()
 
     def fin():
@@ -25,7 +26,7 @@ def driver_setup(request, logger):
 @pytest.fixture(scope="function")
 def logger():
     log_file = ProjectPath.logfile_name() + ".log"
-    return Logger.logger(log_file)
+    return Logger.logger(log_file, FrameworkConfiguration.log_level)
 
 
 @pytest.fixture(scope="function")

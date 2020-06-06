@@ -1,0 +1,4 @@
+aut:
+  selenium_easy:
+      ui:
+        url: https://www.seleniumeasy.com/test/

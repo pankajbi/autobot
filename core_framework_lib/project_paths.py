@@ -29,5 +29,9 @@ class ProjectPath:
         return os.path.join(ProjectPath.reports(), os.environ.get('PYTEST_CURRENT_TEST').split(':')[-1].split(' ')[0])
 
     @classmethod
-    def configuration_file(cls):
-        return os.path.join(ProjectPath.config(), 'configuration.yaml')
+    def aut_configuration_file(cls):
+        return os.path.join(ProjectPath.config(), 'application_configuration.yaml')
+
+    @classmethod
+    def framework_configuration_file(cls):
+        return os.path.join(ProjectPath.config(), 'framework_configuration.yaml')

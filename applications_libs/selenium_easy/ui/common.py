@@ -1,5 +1,5 @@
 from core_framework_lib.selenium_wrapper import SeleniumWrapper
-from core_framework_lib.environment_setup import Env
+from core_framework_lib.setup import AppConfiguration
 
 
 class Common(SeleniumWrapper):
@@ -10,9 +10,9 @@ class Common(SeleniumWrapper):
 
     def launch_selenium_easy(self):
 
-        url = Env.selenium_easy_ui_url()
+        url = AppConfiguration.selenium_easy_ui_url()
 
-        if self.launch_url(url):
+        if self.navigate_url(url):
             self.log.info("Successfully open selenium easy.")
             return True
         else:

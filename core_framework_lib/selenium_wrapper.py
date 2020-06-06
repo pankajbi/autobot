@@ -1,10 +1,15 @@
 from selenium import webdriver
-from select import select
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver import ActionChains
 
 
 class Driver:
 
-    def __init__(self, browser='firefox'):
+    def __init__(self, browser='firefox', implicit_wait=5):
         if browser.lower() == 'firefox':
             self.driver = webdriver.Firefox(keep_alive=False)
         elif browser.lower() == 'chrome':
@@ -12,9 +17,9 @@ class Driver:
             options.add_argument('--ignore-certificate-errors')
             options.add_argument("--test-type")
             self.driver = webdriver.Chrome(chrome_options=options)
+        self.driver.implicitly_wait(implicit_wait)
 
     def get_driver(self):
-        self.driver.maximize_window()
         return self.driver
 
 
@@ -24,11 +29,76 @@ class SeleniumWrapper:
         self.driver = driver
         self.log = log
 
-    def launch_url(self, url):
+    def navigate_url(self, url):
+        """
+        :param url:
+        :return:
+        """
         try:
+            self.driver.maximize_window()
             self.driver.get(url)
             self.log.info("Successfully launched {url}".format(url=url))
             return True
         except Exception as err:
             self.log.error("Exception occurred : {err}".format(err=str(err)))
             return False
+
+    def locator(self, element_tuple):
+        """
+        :param element_tuple:
+        :return:
+        """
+        by, value = element_tuple
+        if by.lower() == "id":
+            locator = By.ID
+        if by.lower() == "xpath":
+            locator = By.XPATH
+        if by.lower() == "link_text":
+            locator = By.LINK_TEXT
+        if by.lower() == "partial_link_text":
+            locator = By.PARTIAL_LINK_TEXT
+        if by.lower() == "name":
+            locator = By.NAME
+        if by.lower() == "tag":
+            locator = By.TAG_NAME
+        if by.lower() == "class":
+            locator = By.CLASS_NAME
+        if by.lower() == "css_selector":
+            locator = By.CSS_SELECTOR
+        else:
+            self.log.error("Invalid locator provided: {by} in {element_tuple}.".format(by=by, element_tuple=element_tuple))
+            return None, None
+
+        return locator, value
+
+    def find_element(self, element_tuple):
+        """
+        :param element_tuple:
+        :return:
+        """
+        try:
+            if isinstance(element_tuple, tuple):
+                by, value = self.locator(element_tuple)
+                element = self.driver.find_element(by, value)
+            else:
+                element = element_tuple
+            return element
+        except Exception as e:
+            self.log.error("Exception occurred : {err}".format(err=str(e)))
+            return None
+
+    def find_elements(self, element_tuple):
+        """
+        :param element_tuple:
+        :return:
+        """
+        try:
+            if isinstance(element_tuple, tuple):
+                by, value = self.locator(element_tuple)
+                element = self.driver.find_elements(by, value)
+            else:
+                element = element_tuple
+            return element
+        except Exception as e:
+            self.log.error("Exception occurred : {err}".format(err=e))
+            return None
