@@ -24,6 +24,10 @@ class Driver:
 
 
 class SeleniumWrapper:
+    """
+    Below is the list of valid locators accepted by all method as 'by' to find element
+    ["id", "xpath", "link text", "partial link text", "name", "tag name", "class name", "css selector"]
+    """
 
     def __init__(self, driver, log):
         self.driver = driver
@@ -51,22 +55,23 @@ class SeleniumWrapper:
         by, value = element_tuple
         if by.lower() == "id":
             locator = By.ID
-        if by.lower() == "xpath":
+        elif by.lower() == "xpath":
             locator = By.XPATH
-        if by.lower() == "link_text":
+        elif by.lower() == "link text":
             locator = By.LINK_TEXT
-        if by.lower() == "partial_link_text":
+        elif by.lower() == "partial link text":
             locator = By.PARTIAL_LINK_TEXT
-        if by.lower() == "name":
+        elif by.lower() == "name":
             locator = By.NAME
-        if by.lower() == "tag":
+        elif by.lower() == "tag":
             locator = By.TAG_NAME
-        if by.lower() == "class":
+        elif by.lower() == "class name":
             locator = By.CLASS_NAME
-        if by.lower() == "css_selector":
+        elif by.lower() == "css selector":
             locator = By.CSS_SELECTOR
         else:
-            self.log.error("Invalid locator provided: {by} in {element_tuple}.".format(by=by, element_tuple=element_tuple))
+            self.log.error(
+                "Invalid locator provided: {by} in {element_tuple}.".format(by=by, element_tuple=element_tuple))
             return None, None
 
         return locator, value
@@ -102,3 +107,65 @@ class SeleniumWrapper:
         except Exception as e:
             self.log.error("Exception occurred : {err}".format(err=e))
             return None
+
+    def click_on_element(self, element_tuple, wait_time=10):
+        """
+        :param element_tuple:
+        :param wait_time:
+        :return:
+        """
+        try:
+            if isinstance(element_tuple, tuple):
+                element = WebDriverWait(self.driver, wait_time).until(EC.element_to_be_clickable(element_tuple))
+            else:
+                element = self.find_element(element_tuple)
+            element.click()
+            return True
+        except Exception as e:
+            self.log.error("Exception occurred : {err}".format(err=e))
+            return False
+
+    def enter_text_box(self, element_tuple, value, clear=False):
+        """
+        :param element_tuple:
+        :param value:
+        :param clear:
+        :return:
+        """
+        try:
+            element = self.find_element(element_tuple)
+            if clear:
+                element.clear()
+            element.send_keys(value)
+            return True
+        except Exception as e:
+            self.log.error("Exception occurred : {err}".format(err=e))
+            return False
+
+    def get_element_attribute(self, element_tuple, attribute):
+        """
+        :param element_tuple:
+        :param attribute:
+        :return:
+        """
+        try:
+            element = self.find_element(element_tuple)
+            value = element.get_attribute(attribute)
+            return value
+        except Exception as e:
+            self.log.error("Exception occurred : {err}".format(err=e))
+            return None
+
+    def get_element_text(self, element_tuple):
+        """
+        :param element_tuple:
+        :return:
+        """
+        try:
+            element = self.find_element(element_tuple)
+            value = element.text
+            return value
+        except Exception as e:
+            self.log.error("Exception occurred : {err}".format(err=e))
+            return None
+
