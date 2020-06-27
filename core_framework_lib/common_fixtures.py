@@ -3,6 +3,7 @@ from core_framework_lib.selenium_wrapper import Driver
 from core_framework_lib.project_paths import ProjectPath
 from core_framework_lib.logger import Logger
 from core_framework_lib.setup import FrameworkConfiguration
+from core_framework_lib.selenium_wrapper import SeleniumWrapper
 
 
 @pytest.fixture(scope="function")  # Possible values for scope are: function, class, module, package or session.

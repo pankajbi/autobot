@@ -5,6 +5,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.touch_actions import TouchActions
+from selenium.webdriver.common.proxy import Proxy
+import datetime
 
 
 class Driver:
@@ -32,6 +35,21 @@ class SeleniumWrapper:
     def __init__(self, driver, log):
         self.driver = driver
         self.log = log
+
+    def capture_screenshot(self, file_name):
+        """
+        :param nodeid:
+        :return:
+        """
+
+        try:
+            if self.driver.save_screenshot(file_name):
+                return True
+            else:
+                return False
+        except Exception as err:
+            self.log.error("Exception occurred : {err}".format(err=str(err)))
+            return False
 
     def navigate_url(self, url):
         """
@@ -151,6 +169,20 @@ class SeleniumWrapper:
         try:
             element = self.find_element(element_tuple)
             value = element.get_attribute(attribute)
+            return value
+        except Exception as e:
+            self.log.error("Exception occurred : {err}".format(err=e))
+            return None
+
+    def get_element_property(self, element_tuple, element_property):
+        """
+        :param element_tuple:
+        :param element_property:
+        :return:
+        """
+        try:
+            element = self.find_element(element_tuple)
+            value = element.get_property(element_property)
             return value
         except Exception as e:
             self.log.error("Exception occurred : {err}".format(err=e))
