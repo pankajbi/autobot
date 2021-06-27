@@ -23,3 +23,5 @@ test_cases/test_pytest_practice/*
 report.html
 reports/*
 *.css
+reports/*
+*.css

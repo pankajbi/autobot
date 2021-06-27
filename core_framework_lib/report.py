@@ -4,11 +4,14 @@ import time
 from core_framework_lib.project_paths import ProjectPath
 import os
 
+
 def pytest_configure(config):
     config._metadata['App name'] = 'seleniumeasy'
 
+
 def pytest_html_report_title(report):
-   report.title = "Test Execution report"
+    report.title = "Test Execution report"
+
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item):
@@ -20,16 +23,19 @@ def pytest_runtest_makereport(item):
     if report.when == 'call' or report.when == "setup":
         logger = item.funcargs['logger']
         extra.append(pytest_html.extras.url(logger.name, name="log"))
-        driver = item.funcargs['driver_setup']
-        selenium = SeleniumWrapper(driver, logger)
-        xfail = hasattr(report, 'wasxfail')
-        if (report.skipped and xfail) or (report.failed and not xfail):
-            # only add additional html on failure
-            screenshot_path = os.path.join( ProjectPath.reports(),"screenshots" )
-            if not os.path.exists(screenshot_path):
-                os.mkdir(screenshot_path)
-            file_name = os.path.join(screenshot_path, report.nodeid.replace("::", "_").replace(".py","_") + time.strftime("%Y-%m-%d_%H-%M-%S", time.gmtime()) +'.png')
-            selenium.capture_screenshot(file_name)
-            if file_name:
-                extra.append(pytest_html.extras.url(file_name, name="screenshot"))
+        if 'driver_setup' in item.funcargs:
+            driver = item.funcargs['driver_setup']
+            selenium = SeleniumWrapper(driver)
+            xfail = hasattr(report, 'wasxfail')
+            if (report.skipped and xfail) or (report.failed and not xfail):
+                # only add additional html on failure
+                screenshot_path = os.path.join(ProjectPath.reports(), "screenshots")
+                if not os.path.exists(screenshot_path):
+                    os.mkdir(screenshot_path)
+                file_name = os.path.join(screenshot_path,
+                                         report.nodeid.replace("::", "_").replace(".py", "_") + time.strftime(
+                                             "%Y-%m-%d_%H-%M-%S", time.gmtime()) + '.png')
+                selenium.capture_screenshot(file_name)
+                if file_name:
+                    extra.append(pytest_html.extras.url(file_name, name="screenshot"))
         report.extra = extra

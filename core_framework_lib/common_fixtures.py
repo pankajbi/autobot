@@ -1,9 +1,8 @@
 import pytest
 from core_framework_lib.selenium_wrapper import Driver
 from core_framework_lib.project_paths import ProjectPath
-from core_framework_lib.logger import Logger
+from core_framework_lib.logger import SetLogger
 from core_framework_lib.setup import FrameworkConfiguration
-from core_framework_lib.selenium_wrapper import SeleniumWrapper
 
 
 @pytest.fixture(scope="function")  # Possible values for scope are: function, class, module, package or session.
@@ -24,10 +23,10 @@ def driver_setup(request, logger):
     return driver_setup
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="function", autouse=True)
 def logger():
     log_file = ProjectPath.logfile_name() + ".log"
-    return Logger.logger(log_file, FrameworkConfiguration.log_level)
+    SetLogger.set_logger(log_file, FrameworkConfiguration.log_level)
 
 
 @pytest.fixture(scope="function")

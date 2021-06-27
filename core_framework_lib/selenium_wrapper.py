@@ -8,6 +8,9 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.touch_actions import TouchActions
 from selenium.webdriver.common.proxy import Proxy
 import datetime
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Driver:
@@ -32,9 +35,8 @@ class SeleniumWrapper:
     ["id", "xpath", "link text", "partial link text", "name", "tag name", "class name", "css selector"]
     """
 
-    def __init__(self, driver, log):
+    def __init__(self, driver):
         self.driver = driver
-        self.log = log
 
     def capture_screenshot(self, file_name):
         """
@@ -48,7 +50,7 @@ class SeleniumWrapper:
             else:
                 return False
         except Exception as err:
-            self.log.error("Exception occurred : {err}".format(err=str(err)))
+            logger.error("Exception occurred : {err}".format(err=str(err)))
             return False
 
     def navigate_url(self, url):
@@ -59,10 +61,10 @@ class SeleniumWrapper:
         try:
             self.driver.maximize_window()
             self.driver.get(url)
-            self.log.info("Successfully launched {url}".format(url=url))
+            logger.info("Successfully launched {url}".format(url=url))
             return True
         except Exception as err:
-            self.log.error("Exception occurred : {err}".format(err=str(err)))
+            logger.error("Exception occurred : {err}".format(err=str(err)))
             return False
 
     def locator(self, element_tuple):
@@ -88,7 +90,7 @@ class SeleniumWrapper:
         elif by.lower() == "css selector":
             locator = By.CSS_SELECTOR
         else:
-            self.log.error(
+            logger.error(
                 "Invalid locator provided: {by} in {element_tuple}.".format(by=by, element_tuple=element_tuple))
             return None, None
 
@@ -107,7 +109,7 @@ class SeleniumWrapper:
                 element = element_tuple
             return element
         except Exception as e:
-            self.log.error("Exception occurred : {err}".format(err=str(e)))
+            logger.error("Exception occurred : {err}".format(err=str(e)))
             return None
 
     def find_elements(self, element_tuple):
@@ -123,7 +125,7 @@ class SeleniumWrapper:
                 element = element_tuple
             return element
         except Exception as e:
-            self.log.error("Exception occurred : {err}".format(err=e))
+            logger.error("Exception occurred : {err}".format(err=e))
             return None
 
     def click_on_element(self, element_tuple, wait_time=10):
@@ -140,7 +142,7 @@ class SeleniumWrapper:
             element.click()
             return True
         except Exception as e:
-            self.log.error("Exception occurred : {err}".format(err=e))
+            logger.error("Exception occurred : {err}".format(err=e))
             return False
 
     def enter_text_box(self, element_tuple, value, clear=False):
@@ -157,7 +159,7 @@ class SeleniumWrapper:
             element.send_keys(value)
             return True
         except Exception as e:
-            self.log.error("Exception occurred : {err}".format(err=e))
+            logger.error("Exception occurred : {err}".format(err=e))
             return False
 
     def get_element_attribute(self, element_tuple, attribute):
@@ -171,7 +173,7 @@ class SeleniumWrapper:
             value = element.get_attribute(attribute)
             return value
         except Exception as e:
-            self.log.error("Exception occurred : {err}".format(err=e))
+            logger.error("Exception occurred : {err}".format(err=e))
             return None
 
     def get_element_property(self, element_tuple, element_property):
@@ -185,7 +187,7 @@ class SeleniumWrapper:
             value = element.get_property(element_property)
             return value
         except Exception as e:
-            self.log.error("Exception occurred : {err}".format(err=e))
+            logger.error("Exception occurred : {err}".format(err=e))
             return None
 
     def get_element_text(self, element_tuple):
@@ -198,6 +200,5 @@ class SeleniumWrapper:
             value = element.text
             return value
         except Exception as e:
-            self.log.error("Exception occurred : {err}".format(err=e))
+            logger.error("Exception occurred : {err}".format(err=e))
             return None
-

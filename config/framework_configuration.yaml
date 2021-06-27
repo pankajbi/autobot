@@ -1,5 +1,5 @@
 logger:
-  log_level: DEBUG
+  log_level: INFO
 
 selenium:
   implicit_wait: 30
