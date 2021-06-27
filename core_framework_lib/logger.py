@@ -6,6 +6,7 @@ class SetLogger:
     @classmethod
     def set_logger(cls, log_file, log_level=logging.INFO):
         logger = logging.getLogger()
+        logger.name = log_file
         logger.setLevel(log_level)
         # create file handler that logs debug and higher level messages
         fh = logging.FileHandler(log_file, mode='w')

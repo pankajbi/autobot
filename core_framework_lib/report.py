@@ -22,13 +22,13 @@ def pytest_runtest_makereport(item):
     extra = getattr(report, 'extra', [])
     if report.when == 'call' or report.when == "setup":
         logger = item.funcargs['logger']
-        extra.append(pytest_html.extras.url(logger.name, name="log"))
-        if 'driver_setup' in item.funcargs:
-            driver = item.funcargs['driver_setup']
-            selenium = SeleniumWrapper(driver)
-            xfail = hasattr(report, 'wasxfail')
-            if (report.skipped and xfail) or (report.failed and not xfail):
-                # only add additional html on failure
+        xfail = hasattr(report, 'wasxfail')
+        if (report.skipped and xfail) or (report.failed and not xfail):
+            # only add additional html on failure
+            extra.append(pytest_html.extras.url(logger.name, name="log"))
+            if 'driver_setup' in item.funcargs:
+                driver = item.funcargs['driver_setup']
+                selenium = SeleniumWrapper(driver)
                 screenshot_path = os.path.join(ProjectPath.reports(), "screenshots")
                 if not os.path.exists(screenshot_path):
                     os.mkdir(screenshot_path)

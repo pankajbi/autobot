@@ -1,12 +1,13 @@
 from applications_libs.selenium_easy.ui.common import Common
 from applications_libs.selenium_easy.ui.homepage import HomePage
 from applications_libs.selenium_easy.ui.simple_form_demo_page import SimpleFormDemo
-
+import pytest
 import logging
 
 logger = logging.getLogger(__name__)
 
 
+# @pytest.mark.parametrize("counter", [1, 2, 3, 4])
 def test_single_input_field(driver_setup):
 
     # Initialization
