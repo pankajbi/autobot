@@ -14,6 +14,7 @@ pathlib2 = "*"
 pytest-datadir = "*"
 pytest-html = "*"
 py = "*"
+pytest-xdist = "*"
 
 [requires]
 python_version = "3.8"

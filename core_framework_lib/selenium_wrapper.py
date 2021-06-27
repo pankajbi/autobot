@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 class Driver:
 
-    def __init__(self, browser='firefox', implicit_wait=5):
+    def __init__(self, browser='chrome', implicit_wait=5):
         if browser.lower() == 'firefox':
             self.driver = webdriver.Firefox(keep_alive=False)
         elif browser.lower() == 'chrome':
