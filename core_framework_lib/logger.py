@@ -17,7 +17,7 @@ class SetLogger:
         formatter = logging.Formatter('%(asctime)s - [%(levelname)s] - %(name)s - %(message)s')
         ch.setFormatter(formatter)
         fh.setFormatter(formatter)
-        # add the handlers to l
+        # add the handlers to logger
         logger.addHandler(ch)
         logger.addHandler(fh)
         return logger

@@ -26,7 +26,7 @@ def driver_setup(request, logger):
 @pytest.fixture(scope="function", autouse=True)
 def logger():
     log_file = ProjectPath.logfile_name() + ".log"
-    SetLogger.set_logger(log_file, FrameworkConfiguration.log_level)
+    return SetLogger.set_logger(log_file, FrameworkConfiguration.log_level)
 
 
 @pytest.fixture(scope="function")

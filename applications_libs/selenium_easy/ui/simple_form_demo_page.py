@@ -1,12 +1,14 @@
 from core_framework_lib.selenium_wrapper import SeleniumWrapper
 import applications_libs.selenium_easy.ui.web_elements as we
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class SimpleFormDemo(SeleniumWrapper):
-    def __init__(self, driver, log):
+    def __init__(self, driver):
 
-        SeleniumWrapper.__init__(self, driver, log)
-        self.log = log
+        SeleniumWrapper.__init__(self, driver)
 
     def enter_message(self, message):
         """
@@ -15,7 +17,7 @@ class SimpleFormDemo(SeleniumWrapper):
         """
 
         if self.enter_text_box(we.TEXTBOX_ENTER_MESSAGE, message):
-            self.log.info("Successfully entered message in text box")
+            logger.info("Successfully entered message in text box")
             return True
         else:
             return False
@@ -25,10 +27,10 @@ class SimpleFormDemo(SeleniumWrapper):
         :return: True/False
         """
         if self.click_on_element(we.BUTTON_SHOW_MESSAGE):
-            self.log.info("Successfully clicked on Show message button")
+            logger.info("Successfully clicked on Show message button")
             return True
         else:
-            self.log.error("Failed to click on Show message button")
+            logger.error("Failed to click on Show message button")
             return False
 
     def validate_your_message(self):
@@ -42,7 +44,7 @@ class SimpleFormDemo(SeleniumWrapper):
         if displayed_message is None:
             return False
         if entered_message == displayed_message:
-            self.log.info("Successfully validated your message")
+            logger.info("Successfully validated your message")
             return True
         else:
             return False

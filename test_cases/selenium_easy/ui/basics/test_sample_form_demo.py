@@ -2,13 +2,17 @@ from applications_libs.selenium_easy.ui.common import Common
 from applications_libs.selenium_easy.ui.homepage import HomePage
 from applications_libs.selenium_easy.ui.simple_form_demo_page import SimpleFormDemo
 
+import logging
 
-def test_single_input_field(driver_setup, logger):
+logger = logging.getLogger(__name__)
+
+
+def test_single_input_field(driver_setup):
 
     # Initialization
-    common = Common(driver_setup, logger)
-    homepage = HomePage(driver_setup, logger)
-    simple_form_demo = SimpleFormDemo(driver_setup, logger)
+    common = Common(driver_setup)
+    homepage = HomePage(driver_setup)
+    simple_form_demo = SimpleFormDemo(driver_setup)
 
     logger.info("Launch app")
     assert common.launch_selenium_easy(), logger.error("Failed to launch selenium easy application")
