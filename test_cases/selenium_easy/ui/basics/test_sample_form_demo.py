@@ -7,8 +7,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-# @pytest.mark.parametrize("counter", [1, 2, 3, 4])
-def test_single_input_field(driver_setup):
+@pytest.mark.parametrize("counter", [1, 2, 3, 4])
+def test_single_input_field(driver_setup, counter):
 
     # Initialization
     common = Common(driver_setup)

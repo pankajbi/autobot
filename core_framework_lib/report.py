@@ -20,12 +20,12 @@ def pytest_runtest_makereport(item):
     report = outcome.get_result()
     report.description = str(item.function.__doc__)
     extra = getattr(report, 'extra', [])
-    if report.when == 'call' or report.when == "setup":
+    if report.when == 'call':
         logger = item.funcargs['logger']
         xfail = hasattr(report, 'wasxfail')
+        extra.append(pytest_html.extras.url(logger.name, name="log"))
         if (report.skipped and xfail) or (report.failed and not xfail):
             # only add additional html on failure
-            extra.append(pytest_html.extras.url(logger.name, name="log"))
             if 'driver_setup' in item.funcargs:
                 driver = item.funcargs['driver_setup']
                 selenium = SeleniumWrapper(driver)
